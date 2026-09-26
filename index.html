@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Travel & Tours</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f9fc;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            padding: 18px 8%;
+            background: rgba(0, 0, 0, 0.65);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00c6a7;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00c6a7;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+                url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #00c6a7;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #009b84;
+            transform: translateY(-3px);
+        }
+
+        /* General Sections */
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #173b4d;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        /* Destinations */
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 22px;
+        }
+
+        .card-content h3 {
+            color: #173b4d;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* Packages */
+        .packages {
+            background: #eaf7f5;
+        }
+
+        .package-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .package {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .package h3 {
+            color: #173b4d;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #00a98f;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .package ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .package ul li {
+            padding: 8px;
+            color: #666;
+        }
+
+        /* About */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .about-content h2 {
+            color: #173b4d;
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .testimonial p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .testimonial h4 {
+            color: #173b4d;
+        }
+
+        /* Contact */
+        .contact {
+            background: #173b4d;
+            color: white;
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 35px;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        form .btn {
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: #102b38;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer span {
+            color: #00c6a7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+            }
+
+            .destinations,
+            .package-container,
+            .testimonials {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .destinations,
+            .package-container,
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Wander<span>Lust</span></div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Explore The World</h1>
+            <p>Discover beautiful places, unforgettable experiences and amazing adventures.</p>
+            <a href="#destinations" class="btn">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section id="destinations">
+        <div class="section-title">
+            <h2>Popular Destinations</h2>
+            <p>Discover some of the world's most beautiful places.</p>
+        </div>
+
+        <div class="destinations">
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+                     alt="Bali">
+                <div class="card-content">
+                    <h3>Bali, Indonesia</h3>
+                    <p>Relax on tropical beaches, explore ancient temples and enjoy Bali's beautiful culture.</p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+                     alt="Paris">
+                <div class="card-content">
+                    <h3>Paris, France</h3>
+                    <p>Experience romantic streets, iconic landmarks, delicious food and French culture.</p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80"
+                     alt="Thailand">
+                <div class="card-content">
+                    <h3>Thailand</h3>
+                    <p>Enjoy crystal-clear beaches, tropical islands, exciting nightlife and local cuisine.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Packages -->
+    <section class="packages" id="packages">
+        <div class="section-title">
+            <h2>Travel Packages</h2>
+            <p>Choose the perfect package for your next adventure.</p>
+        </div>
+
+        <div class="package-container">
+
+            <div class="package">
+                <h3>Weekend Escape</h3>
+                <div class="price">$299</div>
+                <ul>
+                    <li>✓ 3 Days / 2 Nights</li>
+                    <li>✓ Hotel Accommodation</li>
+                    <li>✓ Breakfast Included</li>
+                    <li>✓ City Tour</li>
+                </ul>
+                <a href="#contact" class="btn">Book Now</a>
+            </div>
+
+            <div class="package">
+                <h3>Adventure Trip</h3>
+                <div class="price">$599</div>
+                <ul>
+                    <li>✓ 5 Days / 4 Nights</li>
+                    <li>✓ Premium Hotel</li>
+                    <li>✓ Adventure Activities</li>
+                    <li>✓ Guided Tours</li>
+                </ul>
+                <a href="#contact" class="btn">Book Now</a>
+            </div>
+
+            <div class="package">
+                <h3>Luxury Holiday</h3>
+                <div class="price">$999</div>
+                <ul>
+                    <li>✓ 7 Days / 6 Nights</li>
+                    <li>✓ Luxury Resort</li>
+                    <li>✓ Private Transport</li>
+                    <li>✓ All-Inclusive Meals</li>
+                </ul>
+                <a href="#contact" class="btn">Book Now</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="about">
+
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80"
+                 alt="Mountain travel">
+
+            <div class="about-content">
+                <h2>Travel With Wanderlust</h2>
+                <p>
+                    We believe traveling is more than visiting new places.
+                    It's about discovering new cultures, meeting amazing people
+                    and creating memories that last a lifetime.
+                </p>
+
+                <p>
+                    Our travel experts create unforgettable experiences designed
+                    for explorers, families, couples and adventure seekers.
+                </p>
+
+                <a href="#contact" class="btn">Plan Your Trip</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <div class="section-title">
+            <h2>What Travelers Say</h2>
+            <p>Stories from people who explored with us.</p>
+        </div>
+
+        <div class="testimonials">
+
+            <div class="testimonial">
+                <p>
+                    "The entire trip was perfectly organized. Everything was
+                    smooth, enjoyable and stress-free!"
+                </p>
+                <h4>— Sarah Johnson</h4>
+            </div>
+
+            <div class="testimonial">
+                <p>
+                    "Our Bali vacation was unforgettable. The destinations and
+                    activities were absolutely amazing."
+                </p>
+                <h4>— Michael Brown</h4>
+            </div>
+
+            <div class="testimonial">
+                <p>
+                    "Excellent service and wonderful experiences. I would
+                    definitely travel with Wanderlust again."
+                </p>
+                <h4>— Emma Wilson</h4>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+
+        <div class="contact-container">
+            <h2>Plan Your Next Trip</h2>
+
+            <form>
+                <input type="text" placeholder="Your Name" required>
+
+                <input type="email" placeholder="Your Email" required>
+
+                <select required>
+                    <option value="">Choose Destination</option>
+                    <option>Bali</option>
+                    <option>Paris</option>
+                    <option>Thailand</option>
+                    <option>Maldives</option>
+                    <option>Switzerland</option>
+                </select>
+
+                <textarea placeholder="Tell us about your travel plans..."></textarea>
+
+                <button type="submit" class="btn">Send Enquiry</button>
+            </form>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <span>WanderLust</span>. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
